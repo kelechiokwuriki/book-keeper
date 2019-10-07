@@ -25,7 +25,8 @@ class BooksReservationController extends Controller
      */
     public function index()
     {
-        $reservations = $this->bookReservationService->getAllReservationsForLoggedInUser();
+//        $reservations = $this->bookReservationService->getAllReservationsForLoggedInUser();
+        $reservations = auth()->user()->reservations()->get();
         $bookId = $reservations[0]->book_id;
         $bookTitle = $this->bookService->getBookById($bookId)->title;
 

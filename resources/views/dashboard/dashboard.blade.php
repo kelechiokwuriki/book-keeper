@@ -49,7 +49,7 @@
                     <div class="icon">
                         <i class="ion ion-contacts"></i>
                     </div>
-                    <a href="/reservations" class="small-box-footer">View your recommendations <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="/recommendations" class="small-box-footer">View your recommendations <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
         </div>
