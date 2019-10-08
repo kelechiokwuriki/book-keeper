@@ -31,19 +31,19 @@
                             <tbody>
                             <?php $tableNoCounter = 0; ?>
                             @foreach($reservations as $reservation)
-                                <?php $tableNoCounter++?>
-                                <tr>
-                                    <td>{{$tableNoCounter}}</td>
-                                    <td>{{$bookTitle}}</td>
-                                    <td>{{$reservation->checked_out_at}}</td>
-                                    @if($reservation->checked_in_at === null)
-                                        <td><small>Awaiting</small></td>
-                                    @else
-                                        <td>{{$reservation->checked_in_at}}</td>
-                                    @endif
+                                    <?php $tableNoCounter++?>
+                                    <tr>
+                                        <td>{{$tableNoCounter}}</td>
+                                        <td>{{$reservation->bookTitlesNew}}</td>
+                                        <td>{{$reservation->checked_out_at}}</td>
+                                        @if($reservation->checked_in_at === null)
+                                            <td><small>Awaiting</small></td>
+                                        @else
+                                            <td>{{$reservation->checked_in_at}}</td>
+                                        @endif
 
 
-                                </tr>
+                                    </tr>
                             @endforeach
                             </tbody>
                             <tfoot>

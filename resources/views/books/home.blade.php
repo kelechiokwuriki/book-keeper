@@ -18,6 +18,15 @@
                     <div class="box-header">
                         <h3 class="box-title">Books</h3>
                     </div>
+
+                    <!-- alert for reserving a book-->
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+                    <!--end reservation alert-->
+
                     <div class="box-body">
                         <table id="bookTable" class="table table-bordered table-striped text-center">
                             <thead>

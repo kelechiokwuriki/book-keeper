@@ -25,13 +25,14 @@ class BooksReservationController extends Controller
      */
     public function index()
     {
-//        $reservations = $this->bookReservationService->getAllReservationsForLoggedInUser();
         $reservations = auth()->user()->reservations()->get();
-        $bookId = $reservations[0]->book_id;
-        $bookTitle = $this->bookService->getBookById($bookId)->title;
 
-        //return the reservations for this user
-        return view('reservations.reservations', compact('reservations', 'bookTitle'));
+        foreach($reservations as $reservation)
+        {
+            $reservation->bookTitlesNew = $this->bookService->getBookById($reservation->book_id)->title;
+        }
+
+        return view('reservations.reservations', compact('reservations'));
     }
 
     /**
