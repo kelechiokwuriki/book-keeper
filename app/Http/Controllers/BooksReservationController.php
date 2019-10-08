@@ -27,12 +27,9 @@ class BooksReservationController extends Controller
     {
         $reservations = auth()->user()->reservations()->get();
 
-        foreach($reservations as $reservation)
-        {
-            $reservation->bookTitlesNew = $this->bookService->getBookById($reservation->book_id)->title;
-        }
+        $newReservationObject = $this->bookReservationService->addBooksTitlesToReservationObject($reservations);
 
-        return view('reservations.reservations', compact('reservations'));
+        return view('reservations.reservations', compact('newReservationObject'));
     }
 
     /**

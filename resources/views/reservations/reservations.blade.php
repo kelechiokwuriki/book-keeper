@@ -30,7 +30,7 @@
                             </thead>
                             <tbody>
                             <?php $tableNoCounter = 0; ?>
-                            @foreach($reservations as $reservation)
+                            @foreach($newReservationObject as $reservation)
                                     <?php $tableNoCounter++?>
                                     <tr>
                                         <td>{{$tableNoCounter}}</td>

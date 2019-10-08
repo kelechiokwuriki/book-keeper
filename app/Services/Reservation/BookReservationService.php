@@ -82,6 +82,17 @@ class BookReservationService
         }
     }
 
+    public function addBooksTitlesToReservationObject($reservations)
+    {
+        foreach($reservations as $reservation)
+        {
+            $reservation->bookTitlesNew = $this->bookService->getBookById($reservation->book_id)->title;
+        }
+
+        return $reservations ?? false;
+
+    }
+
     public function getAllReservationsForLoggedInUser()
     {
         try{
