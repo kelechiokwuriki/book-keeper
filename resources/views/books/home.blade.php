@@ -18,15 +18,6 @@
                     <div class="box-header">
                         <h3 class="box-title">Books</h3>
                     </div>
-
-                    <!-- alert for reserving a book-->
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                    <!--end reservation alert-->
-
                     <div class="box-body">
                         <table id="bookTable" class="table table-bordered table-striped text-center">
                             <thead>
@@ -35,8 +26,9 @@
                                 <th>Title</th>
                                 <th>Author</th>
                                 <th>Version</th>
-                                <th>Availablle</th>
-                                <th colspan="2">Actions</th>
+                                <th>Available</th>
+                                <th>View</th>
+                                <th>Reservation</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -54,50 +46,30 @@
                                         <td>Not available</td>
                                     @endif
                                     <td><button id="{{$book->id}}" data-target="#viewBookModal" data-toggle="modal"  data-title="{{$book->title}}"
-                                                class="btn btn-primary viewBook" role="button">View</button></td>
-                                    <td>
-                                        <form method="POST" action="/reservations/">
-                                            {{csrf_field()}}
-                                            <input type="hidden" name="bookId" value="{{$book->id}}" placeholder="Device Name">
-                                            <button type="submit" class="btn btn-danger" role="button">Reserve book</button>
-                                        </form>
-                                    </td>
+                                                class="btn btn-info viewBook" role="button">View</button></td>
+                                    @if($book->available)
+                                        <td><form method="POST" action="/reservations/">
+                                                {{csrf_field()}}
+                                                <input type="hidden" name="bookId" value="{{$book->id}}" placeholder="Device Name">
+                                                <button type="submit" class="btn btn-success" role="button">Reserve book</button>
+                                            </form></td>
+                                    @else
+                                        <td><form method="GET" action="/reservations/">
+                                                {{csrf_field()}}
+                                                <input type="hidden" name="bookId" value="{{$book->id}}" placeholder="Device Name">
+                                                <button type="submit" class="btn btn-warning" role="button">View reservation</button>
+                                            </form></td>
+                                    @endif
+
                                 </tr>
                             @endforeach
                             </tbody>
-                            <tfoot>
                             </tfoot>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!--begin book modal-->
-        <div class="modal fade" id="viewBookModal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Book details</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>Book title : <strong id="bookTitle"></strong></p>
-                        <p>Book author : <strong id="bookAuthor"></strong></p>
-                        <p>Book version : <strong id="bookVersion"></strong></p>
-                        <p>Book available : <strong id="bookAvailable"></strong></p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Reserve book</button>
-                    </div>
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
-        <!--end of book modal-->
     </section>
 
 @endsection

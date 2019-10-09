@@ -111,18 +111,6 @@
 
             <!-- Main content -->
             <section class="content">
-                @if($errors->any())
-                    <div class="box-body">
-                        <div class="alert alert-danger alert-dismissable">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <h4><i class="icon fa fa-ban"></i> Alert!</h4>
-                            @foreach($errors->all() as $error)
-                                {{ $error }}
-                            @endforeach
-                        </div>
-                    </div>
-                @endif
-
                 @yield('content')
 
             </section>

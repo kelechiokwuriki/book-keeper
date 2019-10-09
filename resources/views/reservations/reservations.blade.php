@@ -21,12 +21,12 @@
                     <div class="box-body">
                         <table id="reservationsTable" class="table table-bordered table-striped text-center">
                             <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Book</th>
-                                <th>Checked out date</th>
-                                <th>Checked in date</th>
-                            </tr>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Book</th>
+                                    <th>Checked out date</th>
+                                    <th>Checked in date</th>
+                                </tr>
                             </thead>
                             <tbody>
                             <?php $tableNoCounter = 0; ?>
@@ -41,8 +41,6 @@
                                         @else
                                             <td>{{$reservation->checked_in_at}}</td>
                                         @endif
-
-
                                     </tr>
                             @endforeach
                             </tbody>

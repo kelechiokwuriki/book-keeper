@@ -39,11 +39,10 @@
 <script src="{{ asset('vendor/jquery/dist/jquery.min.js') }}"></script>
 <script src="{{ asset('vendor/jquery/dist/jquery.slimscroll.min.js') }}"></script>
 <script src="{{ asset('vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-{{--<script src="{{ asset('vendor/datatables/dist/js/jquery.dataTables.min.js') }}"></script>--}}
-{{--<script src="{{ asset('vendor/datatables/dist/js/dataTables.bootstrap.min.js') }}"></script>--}}
 <script type="text/javascript" src="{{ asset('js/Bookapp.js') }}"></script>
 <script>
     $(function () {
+        $('#reservationsTable').DataTable();
         $('#bookTable').DataTable();
     })
 </script>
