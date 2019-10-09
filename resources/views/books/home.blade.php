@@ -48,15 +48,15 @@
                                     <td><button id="{{$book->id}}" data-target="#viewBookModal" data-toggle="modal"  data-title="{{$book->title}}"
                                                 class="btn btn-info viewBook" role="button">View</button></td>
                                     @if($book->available)
-                                        <td><form method="POST" action="/reservations/">
+                                        <td><form method="POST" action="/reservations">
                                                 {{csrf_field()}}
-                                                <input type="hidden" name="bookId" value="{{$book->id}}" placeholder="Device Name">
+                                                <input type="hidden" name="bookId" value="{{$book->id}}">
                                                 <button type="submit" class="btn btn-success" role="button">Reserve book</button>
                                             </form></td>
                                     @else
-                                        <td><form method="GET" action="/reservations/">
+                                        <td><form method="GET" action="/reservations/{{$book->id}}">
                                                 {{csrf_field()}}
-                                                <input type="hidden" name="bookId" value="{{$book->id}}" placeholder="Device Name">
+                                                <input type="hidden" name="bookId" value="{{$book->id}}">
                                                 <button type="submit" class="btn btn-warning" role="button">View reservation</button>
                                             </form></td>
                                     @endif
@@ -70,6 +70,31 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="viewBookModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h5 class="modal-title">Book details</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>Book title : <strong id="bookTitle"></strong></p>
+                        <p>Book author : <strong id="bookAuthor"></strong></p>
+                        <p>Book version : <strong id="bookVersion"></strong></p>
+                        <p>Book available : <strong id="bookAvailable"></strong></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Reserve book</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
     </section>
 
 @endsection

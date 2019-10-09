@@ -9,7 +9,6 @@ $(document).ready(function(){
             type: "GET",
             success:function (data) {
                 if(data != null){
-                    $('#bookModalTitle').html(data.title);
                     $('#bookTitle').html(data.title);
                     $('#bookAuthor').html(data.author);
                     $('#bookVersion').html(data.version);

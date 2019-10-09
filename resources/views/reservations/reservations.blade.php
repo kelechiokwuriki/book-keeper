@@ -26,6 +26,7 @@
                                     <th>Book</th>
                                     <th>Checked out date</th>
                                     <th>Checked in date</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -41,6 +42,11 @@
                                         @else
                                             <td>{{$reservation->checked_in_at}}</td>
                                         @endif
+                                        <td><form method="DELETE" action="/reservations/{{$reservation->id}}">
+                                                {{csrf_field()}}
+                                                <input type="hidden" name="bookId" value="{{$reservation->id}}" placeholder="Device Name">
+                                                <button type="submit" class="btn btn-warning" role="button">Delete reservation</button>
+                                            </form></td>
                                     </tr>
                             @endforeach
                             </tbody>
