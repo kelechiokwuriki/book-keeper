@@ -43,8 +43,8 @@ class EloquentRepository implements RepositoryInterface
         return $this->model->all()->count();
     }
 
-    public function where($value, $expected)
+    public function where($value, $match)
     {
-         return $this->model->where($value, $expected)->get();
+         return $this->model->where($value, $match)->get();
     }
 }

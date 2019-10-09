@@ -8,6 +8,7 @@ use App\Book;
 use App\Repositories\BookReservation\BookReservationRepository;
 use App\Reservation;
 use App\Services\Book\BookService;
+use App\Services\User\UserService;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -16,12 +17,18 @@ class BookReservationService
 {
     protected $reservationRepository;
     protected $bookService;
+    protected $userService;
+
     protected $bookModel;
 
-    public function __construct(BookReservationRepository $reservationRepository, BookService $bookService, Book $bookModel)
+    public function __construct(BookReservationRepository $reservationRepository,
+                                BookService $bookService,
+                                UserService $userService,
+                                Book $bookModel)
     {
         $this->reservationRepository = $reservationRepository;
         $this->bookService = $bookService;
+        $this->userService = $userService;
         $this->bookModel = $bookModel;
     }
 
@@ -69,6 +76,19 @@ class BookReservationService
         }
     }
 
+    public function getReservationWhere($id)
+    {
+        try{
+            $result = $this->reservationRepository->where('book_id', $id);
+
+            return $this->isValid($result);
+
+        }catch (\Exception $exception){
+            echo $exception->getMessage(); Log::error($exception->getMessage());
+            return false;
+        }
+    }
+
     public function getAllReservations()
     {
         try{
@@ -82,21 +102,31 @@ class BookReservationService
         }
     }
 
+    public function addReservedByInfoToReservationObject($reservations)
+    {
+        foreach($reservations as $reservation)
+        {
+            $reservation->reservedBy = $this->userService->getUserById($reservation->user_id)->name;
+        }
+
+        return $reservations ?? false;
+    }
+
     public function addBooksTitlesToReservationObject($reservations)
     {
         foreach($reservations as $reservation)
         {
-            $reservation->bookTitlesNew = $this->bookService->getBookById($reservation->book_id)->title;
+            $reservation->bookTitleNew = $this->bookService->getBookById($reservation->book_id)->title;
         }
 
         return $reservations ?? false;
 
     }
 
-    public function getAllReservationsForLoggedInUser()
+    public function getAllReservationsWhere($id)
     {
         try{
-            $result = $this->reservationRepository->where('user_id', Auth::id());
+            $result = $this->reservationRepository->where('book_id', $id);
 
             return $this->isValid($result);
 

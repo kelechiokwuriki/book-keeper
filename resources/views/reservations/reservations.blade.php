@@ -44,7 +44,7 @@
                                         @endif
                                         <td><form method="DELETE" action="/reservations/{{$reservation->id}}">
                                                 {{csrf_field()}}
-                                                <input type="hidden" name="bookId" value="{{$reservation->id}}" placeholder="Device Name">
+                                                <input type="hidden" name="reservationId" value="{{$reservation->id}}" placeholder="Device Name">
                                                 <button type="submit" class="btn btn-warning" role="button">Delete reservation</button>
                                             </form></td>
                                     </tr>

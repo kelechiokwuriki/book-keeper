@@ -60,11 +60,16 @@ class BooksReservationController extends Controller
      * Display the specified resource.
      *
      * @param Reservation $reservation
-     * @return void
+     * @return bool
      */
-    public function show(Reservation $reservation)
+    public function show($id)
     {
-        //
+        //get reservation by book id
+        $reservation = $this->bookReservationService->getReservationWhere($id);
+        $newReservation = $this->bookReservationService->addBooksTitlesToReservationObject($reservation);
+        $result = $this->bookReservationService->addReservedByInfoToReservationObject($newReservation);
+        return $result;
+
     }
 
     /**

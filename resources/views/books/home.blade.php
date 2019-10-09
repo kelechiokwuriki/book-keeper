@@ -45,7 +45,7 @@
                                     @else
                                         <td>Not available</td>
                                     @endif
-                                    <td><button id="{{$book->id}}" data-target="#viewBookModal" data-toggle="modal"  data-title="{{$book->title}}"
+                                    <td><button id="{{$book->id}}" data-target="#viewBookModal" data-toggle="modal"
                                                 class="btn btn-info viewBook" role="button">View</button></td>
                                     @if($book->available)
                                         <td><form method="POST" action="/reservations">
@@ -54,13 +54,9 @@
                                                 <button type="submit" class="btn btn-success" role="button">Reserve book</button>
                                             </form></td>
                                     @else
-                                        <td><form method="GET" action="/reservations/{{$book->id}}">
-                                                {{csrf_field()}}
-                                                <input type="hidden" name="bookId" value="{{$book->id}}">
-                                                <button type="submit" class="btn btn-warning" role="button">View reservation</button>
-                                            </form></td>
+                                        <td><button id="{{$book->id}}" data-target="#viewReservationModal" data-toggle="modal"
+                                                    class="btn btn-warning viewReservation" role="button">View reservation</button></td>
                                     @endif
-
                                 </tr>
                             @endforeach
                             </tbody>
@@ -94,7 +90,32 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
-        <!-- /.modal -->
+        <!-- /.end book modal -->
+
+        <!--reservation modal-->
+        <div class="modal fade" id="viewReservationModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h5 class="modal-title">Reservation details</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>Book :<strong id="bookName"></strong></p>
+                        <p>Reserved by :<strong id="reservedBy"></strong></p>
+                        <p>Checked out date : <strong id="checkedOutDate"></strong></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Reserve book</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.end reservation modal -->
     </section>
 
 @endsection
