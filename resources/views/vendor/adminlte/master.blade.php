@@ -15,7 +15,7 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{ asset('vendor/Ionicons/css/ionicons.min.css') }}">
     <!--datatables-->
-{{--    <link rel="stylesheet" href="{{ asset('vendor/datatables/dist/css/dataTables.bootstrap.min.css') }}">--}}
+    <link rel="stylesheet" href="{{ asset('vendor/datatables/dist/css/dataTables.bootstrap.min.css') }}">
 
     @include('adminlte::plugins', ['type' => 'css'])
 

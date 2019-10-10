@@ -35,7 +35,7 @@
                                     <?php $tableNoCounter++?>
                                     <tr>
                                         <td>{{$tableNoCounter}}</td>
-                                        <td>{{$reservation->bookTitlesNew}}</td>
+                                        <td>{{$reservation->bookTitleNew}}</td>
                                         <td>{{$reservation->checked_out_at}}</td>
                                         @if($reservation->checked_in_at === null)
                                             <td><small>Awaiting</small></td>

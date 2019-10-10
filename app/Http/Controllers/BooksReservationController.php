@@ -52,6 +52,8 @@ class BooksReservationController extends Controller
     public function store(Request $request)
     {
         $this->bookReservationService->checkBookOut($request->bookId);
+//        session()->put('success','Book reserved!');
+
 
         return redirect('/books')->with('success', 'Book reserved!');
     }

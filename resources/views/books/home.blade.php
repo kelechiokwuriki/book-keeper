@@ -19,6 +19,14 @@
                         <h3 class="box-title">Books</h3>
                     </div>
                     <div class="box-body">
+                        @if (session('success'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('success') }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
                         <table id="bookTable" class="table table-bordered table-striped text-center">
                             <thead>
                             <tr>
@@ -83,7 +91,11 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Reserve book</button>
+                            <form method="POST" action="/reservations">
+                                {{csrf_field()}}
+                                <input type="hidden" id="bookId" name="bookId" value="">
+                                <button type="submit" id="bookReserveModal" class="btn btn-success" role="button">Reserve book</button>
+                            </form>
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -107,8 +119,8 @@
                         <p>Checked out date : <strong id="checkedOutDate"></strong></p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Reserve book</button>
+                        <button type="button" class="btn btn-default pull-left " data-dismiss="modal">Close</button>
+                            <button type="submit" id="reserve" class="btn btn-success" role="button">Reserve book</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->
