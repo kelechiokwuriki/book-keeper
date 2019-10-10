@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Reservation;
 use App\Services\Book\BookService;
 use App\Services\Reservation\BookReservationService;
+use App\Services\Reservation\ReservationCrud;
 use Illuminate\Http\Request;
 
 class BooksReservationController extends Controller
@@ -12,7 +13,8 @@ class BooksReservationController extends Controller
     protected $bookReservationService;
     protected $bookService;
 
-    public function __construct(BookReservationService $bookReservationService, BookService $bookService)
+    public function __construct(BookReservationService $bookReservationService,
+                                BookService $bookService)
     {
         $this->bookReservationService = $bookReservationService;
         $this->bookService = $bookService;
@@ -27,7 +29,7 @@ class BooksReservationController extends Controller
     {
         $reservations = auth()->user()->reservations()->get();
 
-        $newReservationObject = $this->bookReservationService->addBooksTitlesToReservationObject($reservations);
+        $newReservationObject = $this->bookReservationService->returnReservObjWithMoreInfo($reservations);
 
         return view('reservations.reservations', compact('newReservationObject'));
     }
@@ -68,9 +70,9 @@ class BooksReservationController extends Controller
     {
         //get reservation by book id
         $reservation = $this->bookReservationService->getReservationWhereFieldMatches($id);
-        $newReservation = $this->bookReservationService->addBooksTitlesToReservationObject($reservation);
-        $result = $this->bookReservationService->addReservedByInfoToReservationObject($newReservation);
-        return $result;
+        $reservationObj = $this->bookReservationService->returnReservObjWithMoreInfo($reservation);
+
+        return $reservationObj;
 
     }
 

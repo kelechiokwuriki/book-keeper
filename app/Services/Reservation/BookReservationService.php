@@ -83,9 +83,7 @@ class BookReservationService
     {
         try{
             $result = $this->reservationRepository->getById($id);
-
             return $this->isValid($result);
-
         } catch (\Exception $exception){
             echo $exception->getMessage(); Log::error($exception->getMessage());
             return false;
@@ -94,50 +92,40 @@ class BookReservationService
 
     public function deleteReservation($id)
     {
-        return $this->reservationRepository->delete($id);
-    }
-
-    public function getAllReservations()
-    {
         try{
-            $result = $this->reservationRepository->all();
-
-            return $this->isValid($result);
-
+            return $this->reservationRepository->delete($id);
         } catch (\Exception $exception){
             echo $exception->getMessage(); Log::error($exception->getMessage());
             return false;
         }
     }
 
-    public function addReservedByInfoToReservationObject($reservations)
+    public function getAllReservations()
     {
+        try{
+            $result = $this->reservationRepository->all();
+            return $this->isValid($result);
+        } catch (\Exception $exception){
+            echo $exception->getMessage(); Log::error($exception->getMessage());
+            return false;
+        }
+    }
+
+    public function returnReservObjWithMoreInfo($reservations) {
         foreach($reservations as $reservation)
         {
+            $reservation->bookTitleNew = $this->bookService->getBookById($reservation->book_id)->title;
             $reservation->reservedBy = $this->userService->getUserById($reservation->user_id)->name;
         }
 
         return $reservations ?? false;
     }
 
-    public function addBooksTitlesToReservationObject($reservations)
-    {
-        foreach($reservations as $reservation)
-        {
-            $reservation->bookTitleNew = $this->bookService->getBookById($reservation->book_id)->title;
-        }
-
-        return $reservations ?? false;
-
-    }
-
     public function getReservationWhereFieldMatches($id)
     {
         try{
             $result = $this->reservationRepository->where('book_id', $id);
-
             return $this->isValid($result);
-
         }catch (\Exception $exception){
             echo $exception->getMessage(); Log::error($exception->getMessage());
             return false;
