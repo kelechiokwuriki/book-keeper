@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Book;
 use App\Services\Book\BookService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class BooksController extends Controller
 {
@@ -24,8 +25,17 @@ class BooksController extends Controller
     {
         $books = $this->bookService->getAllBooks();
 
-        return view('books.home', compact('books'));
 
+        foreach ($books as $book)
+        {
+            if($book->available) {
+                $book->available = 'available';
+            } else {
+                $book->available = 'Not available';
+            }
+        }
+
+        return view('books.home', compact('books'));
     }
 
     /**

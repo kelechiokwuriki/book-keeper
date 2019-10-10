@@ -19,6 +19,14 @@
                         <h3 class="box-title">Reservations</h3>
                     </div>
                     <div class="box-body">
+                        @if (session('success'))
+                            <div class="alert alert-success alert-dismissible" role="alert">
+                                {{ session('success') }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
                         <table id="reservationsTable" class="table table-bordered table-striped text-center">
                             <thead>
                                 <tr>
@@ -42,11 +50,14 @@
                                         @else
                                             <td>{{$reservation->checked_in_at}}</td>
                                         @endif
-                                        <td><form method="DELETE" action="/reservations/{{$reservation->id}}">
+                                        <td>
+                                            <form method="POST" action="/reservations/{{$reservation->id}}">
                                                 {{csrf_field()}}
-                                                <input type="hidden" name="reservationId" value="{{$reservation->id}}" placeholder="Device Name">
+                                                {{ method_field('DELETE') }}
+                                                <input type="hidden" name="reservationId" value="{{$reservation->id}}">
                                                 <button type="submit" class="btn btn-warning" role="button">Delete reservation</button>
-                                            </form></td>
+                                            </form>
+                                        </td>
                                     </tr>
                             @endforeach
                             </tbody>

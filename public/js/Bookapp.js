@@ -1,5 +1,6 @@
 //this function fetches book data when view is clicked
 $(document).ready(function(){
+    $('.alert').alert();
     //script to view a book when modal is clicked
     $('.viewBook').click(function (e) {
         //disable the modal button befpre data loads

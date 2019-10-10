@@ -20,7 +20,7 @@
                     </div>
                     <div class="box-body">
                         @if (session('success'))
-                            <div class="alert alert-success" role="alert">
+                            <div class="alert alert-success alert-dismissible" role="alert">
                                 {{ session('success') }}
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -48,14 +48,10 @@
                                     <td>{{$book->title}}</td>
                                     <td>{{$book->author}}</td>
                                     <td>{{$book->version}}</td>
-                                    @if($book->available)
-                                        <td>Available</td>
-                                    @else
-                                        <td>Not available</td>
-                                    @endif
+                                    <td>{{$book->available}}</td>
                                     <td><button id="{{$book->id}}" data-target="#viewBookModal" data-toggle="modal"
                                                 class="btn btn-info viewBook" role="button">View</button></td>
-                                    @if($book->available)
+                                    @if($book->available === 'available')
                                         <td><form method="POST" action="/reservations">
                                                 {{csrf_field()}}
                                                 <input type="hidden" name="bookId" value="{{$book->id}}">

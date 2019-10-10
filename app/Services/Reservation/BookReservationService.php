@@ -5,6 +5,7 @@ namespace App\Services\Reservation;
 
 
 use App\Book;
+use App\Repositories\Book\BookRepository;
 use App\Repositories\BookReservation\BookReservationRepository;
 use App\Reservation;
 use App\Services\Book\BookService;
@@ -18,10 +19,12 @@ class BookReservationService
     protected $reservationRepository;
     protected $bookService;
     protected $userService;
+    protected $bookRepository;
 
     protected $bookModel;
 
     public function __construct(BookReservationRepository $reservationRepository,
+                                BookRepository $bookRepository,
                                 BookService $bookService,
                                 UserService $userService,
                                 Book $bookModel)
@@ -35,7 +38,7 @@ class BookReservationService
     public function checkBookIn($bookId)
     {
         try{
-            $bookReservation = $this->bookModel->reservations()->where('user_id', Auth::id())
+            $bookReservation = $this->bookModel->reservations()->where('user_id', auth()->id())
                 ->whereNotNull('checked_out_at')
                 ->whereNull('checked_in_at')
                 ->first();
@@ -76,17 +79,22 @@ class BookReservationService
         }
     }
 
-    public function getReservationWhere($id)
+    public function getReservationById($id)
     {
         try{
-            $result = $this->reservationRepository->where('book_id', $id);
+            $result = $this->reservationRepository->getById($id);
 
             return $this->isValid($result);
 
-        }catch (\Exception $exception){
+        } catch (\Exception $exception){
             echo $exception->getMessage(); Log::error($exception->getMessage());
             return false;
         }
+    }
+
+    public function deleteReservation($id)
+    {
+        return $this->reservationRepository->delete($id);
     }
 
     public function getAllReservations()
@@ -123,14 +131,14 @@ class BookReservationService
 
     }
 
-    public function getAllReservationsWhere($id)
+    public function getReservationWhereFieldMatches($id)
     {
         try{
             $result = $this->reservationRepository->where('book_id', $id);
 
             return $this->isValid($result);
 
-        } catch (\Exception $exception){
+        }catch (\Exception $exception){
             echo $exception->getMessage(); Log::error($exception->getMessage());
             return false;
         }

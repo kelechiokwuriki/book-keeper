@@ -49,7 +49,7 @@ class BookService
             {
                 return $result;
             }
-            return 'No book found';
+            return false;
 
         }  catch (\Exception $exception){
             echo $exception->getMessage(); Log::error($exception->getMessage());

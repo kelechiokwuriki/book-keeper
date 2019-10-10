@@ -67,7 +67,7 @@ class BooksReservationController extends Controller
     public function show($id)
     {
         //get reservation by book id
-        $reservation = $this->bookReservationService->getReservationWhere($id);
+        $reservation = $this->bookReservationService->getReservationWhereFieldMatches($id);
         $newReservation = $this->bookReservationService->addBooksTitlesToReservationObject($reservation);
         $result = $this->bookReservationService->addReservedByInfoToReservationObject($newReservation);
         return $result;
@@ -103,8 +103,10 @@ class BooksReservationController extends Controller
      * @param  \App\Reservation  $reservation
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Reservation $reservation)
+    public function destroy($id)
     {
-        //
+        $this->bookReservationService->deleteReservation($id);
+
+        return redirect('/reservations')->with('success', 'Book deleted!');
     }
 }
