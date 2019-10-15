@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6206aebe-0816-4156-bccf-3a14a229ee34" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BooksReservationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BooksReservationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Services/Reservation/ReservationTransformer.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/Bookapp.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/Bookapp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/books/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/books/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/reservations/reservations.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/reservations/reservations.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/vendor/adminlte/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/adminlte/master.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -49,27 +45,6 @@
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="homestead: schema" type="76f4a085:MysqlImplModel$Schema" />
       </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="homestead: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="books: table" type="285a2a93:MysqlImplModel$Table" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="homestead: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="reservations: table" type="285a2a93:MysqlImplModel$Table" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="homestead: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="users: table" type="285a2a93:MysqlImplModel$Table" />
-      </path>
     </expand>
     <select />
   </component>
@@ -78,74 +53,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/reservations/reservations.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="41" column="45" lean-forward="true" selection-start-line="41" selection-start-column="45" selection-end-line="41" selection-end-column="45" />
+            <state relative-caret-position="63">
+              <caret line="51" column="45" selection-start-line="51" selection-start-column="45" selection-end-line="51" selection-end-column="45" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/books/home.blade.php">
+        <entry file="file://$PROJECT_DIR$/app/Services/Reservation/BookReservationService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="265">
-              <caret line="22" column="59" selection-start-line="22" selection-start-column="59" selection-end-line="22" selection-end-column="59" />
+            <state relative-caret-position="519">
+              <caret line="119" lean-forward="true" selection-start-line="116" selection-start-column="8" selection-end-line="119" />
               <folding>
-                <element signature="e#1044#1051#1#HTML" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="das://85c7471f-833e-474a-a172-8f4a4edcbe47/schema/homestead/table/reservations">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state projectRestartId="359de2d4-5f7d-4585-9589-b60eb3015f6d">
-              <filtering>
-                <filter text="" />
-              </filtering>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="das://85c7471f-833e-474a-a172-8f4a4edcbe47/schema/homestead/table/books">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state projectRestartId="359de2d4-5f7d-4585-9589-b60eb3015f6d">
-              <filtering>
-                <filter text="" />
-              </filtering>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/85c7471f-833e-474a-a172-8f4a4edcbe47/console_1.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="35" selection-start-column="35" selection-end-column="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/vendor/adminlte/master.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="460">
-              <caret line="22" column="91" lean-forward="true" selection-start-line="22" selection-start-column="91" selection-end-line="22" selection-end-column="91" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/BooksReservationController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="111">
-              <caret line="53" column="70" lean-forward="true" selection-start-line="53" selection-start-column="70" selection-end-line="53" selection-end-column="70" />
-              <folding>
-                <element signature="e#40#60#0#PHP" expanded="true" />
+                <element signature="e#46#59#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -207,7 +130,6 @@
         <option value="$PROJECT_DIR$/app/Repositories/User/UserRepository.php" />
         <option value="$PROJECT_DIR$/app/Services/User/UserService.php" />
         <option value="$PROJECT_DIR$/app/Services/Reservation/BookReservationService.php" />
-        <option value="$PROJECT_DIR$/resources/views/reservations/reservations.blade.php" />
         <option value="$PROJECT_DIR$/config/adminlte.php" />
         <option value="$PROJECT_DIR$/resources/views/vendor/adminlte/master.blade.php" />
         <option value="$PROJECT_DIR$/app/Services/Reservation/ReservationTransformer.php" />
@@ -219,6 +141,7 @@
         <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
         <option value="85c7471f-833e-474a-a172-8f4a4edcbe47/schema/homestead/table/reservations.sql" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/85c7471f-833e-474a-a172-8f4a4edcbe47/console_1.sql" />
+        <option value="$PROJECT_DIR$/resources/views/reservations/reservations.blade.php" />
       </list>
     </option>
   </component>
@@ -541,6 +464,13 @@
               <item name="Book-keeper" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="reservations" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Book-keeper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Book-keeper" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
               <item name="vendor" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -642,38 +572,48 @@
       <workItem from="1570448659442" duration="16479000" />
       <workItem from="1570545558263" duration="4764000" />
       <workItem from="1570564185429" duration="26035000" />
+      <workItem from="1571162235651" duration="1205000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="134688000" />
+    <option name="totallyTimeSpent" value="135893000" />
+  </component>
+  <component name="TodoView" selected-index="1">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="6" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49913943" visible="true" weight="0.19027181" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49913943" visible="true" weight="0.19241774" />
       <window_info id="Structure" order="1" sideWeight="0.5008606" side_tool="true" weight="0.1595136" />
       <window_info id="npm" order="2" sideWeight="0.5008606" side_tool="true" weight="0.1595136" />
       <window_info id="Favorites" order="3" sideWeight="0.5008606" side_tool="true" weight="0.1595136" />
-      <window_info anchor="bottom" id="SQL Generator" weight="0.25061426" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.22604422" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32923833" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info active="true" anchor="bottom" id="TODO" order="6" visible="true" weight="0.32923833" />
       <window_info anchor="bottom" id="Database Console" order="7" weight="0.28873238" />
       <window_info anchor="bottom" id="Docker" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4985694" visible="true" weight="0.29238328" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4985694" weight="0.26412776" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50143063" side_tool="true" weight="0.2862408" />
+      <window_info anchor="bottom" id="SQL Generator" order="13" weight="0.25061426" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info active="true" anchor="right" id="Database" order="3" visible="true" weight="0.084406294" />
+      <window_info anchor="right" id="Database" order="3" visible="true" weight="0.11516452" />
     </layout>
     <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49913943" visible="true" weight="0.21459228" />
@@ -830,13 +770,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="35" column="11" selection-start-line="35" selection-start-column="11" selection-end-line="35" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/.env" />
     <entry file="file://$PROJECT_DIR$/resources/views/vendor/adminlte/page.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="945">
@@ -949,37 +883,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Services/Reservation/ReservationTransformer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="20" column="16" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/BooksController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-455">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/reservations/reservations.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="41" column="45" lean-forward="true" selection-start-line="41" selection-start-column="45" selection-end-line="41" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Services/Reservation/BookReservationService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="626">
-          <caret line="119" column="9" lean-forward="true" selection-start-line="116" selection-start-column="8" selection-end-line="119" selection-end-column="9" />
-          <folding>
-            <element signature="e#46#59#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Services/Reservation/ReservationTransformer.php" />
     <entry file="file://$PROJECT_DIR$/public/js/Bookapp.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="473">
@@ -1001,49 +905,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/BooksReservationController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="53" column="70" lean-forward="true" selection-start-line="53" selection-start-column="70" selection-end-line="53" selection-end-column="70" />
-          <folding>
-            <element signature="e#40#60#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/vendor/bootstrap/dist/css/bootstrap.css">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/vendor/adminlte/master.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="22" column="91" lean-forward="true" selection-start-line="22" selection-start-column="91" selection-end-line="22" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/books/home.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="22" column="59" selection-start-line="22" selection-start-column="59" selection-end-line="22" selection-end-column="59" />
-          <folding>
-            <element signature="e#1044#1051#1#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="das://85c7471f-833e-474a-a172-8f4a4edcbe47/schema/homestead/table/reservations.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="21">
           <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://85c7471f-833e-474a-a172-8f4a4edcbe47/schema/homestead/table/reservations">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="359de2d4-5f7d-4585-9589-b60eb3015f6d">
-          <filtering>
-            <filter text="" />
-          </filtering>
         </state>
       </provider>
     </entry>
@@ -1054,12 +922,69 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://85c7471f-833e-474a-a172-8f4a4edcbe47/schema/homestead/table/books">
+    <entry file="file://$PROJECT_DIR$/resources/views/vendor/adminlte/master.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="22" column="91" selection-start-line="22" selection-start-column="91" selection-end-line="22" selection-end-column="91" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/BooksReservationController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1029">
+          <caret line="53" column="43" selection-start-line="53" selection-start-column="43" selection-end-line="53" selection-end-column="43" />
+          <folding>
+            <element signature="e#40#60#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://85c7471f-833e-474a-a172-8f4a4edcbe47/schema/homestead/table/reservations">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="359de2d4-5f7d-4585-9589-b60eb3015f6d">
+        <state projectRestartId="c5786ca7-52ca-4272-b5c5-f12d1c7917d9">
           <filtering>
             <filter text="" />
           </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://85c7471f-833e-474a-a172-8f4a4edcbe47/schema/homestead/table/books">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="c5786ca7-52ca-4272-b5c5-f12d1c7917d9">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/BooksController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="25" column="51" selection-start-line="25" selection-start-column="51" selection-end-line="25" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/books/home.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-410">
+          <caret line="22" column="59" selection-start-line="22" selection-start-column="59" selection-end-line="22" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Services/Reservation/BookReservationService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="519">
+          <caret line="119" lean-forward="true" selection-start-line="116" selection-start-column="8" selection-end-line="119" />
+          <folding>
+            <element signature="e#46#59#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/reservations/reservations.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="51" column="45" selection-start-line="51" selection-start-column="45" selection-end-line="51" selection-end-column="45" />
         </state>
       </provider>
     </entry>
