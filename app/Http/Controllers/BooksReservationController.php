@@ -56,8 +56,7 @@ class BooksReservationController extends Controller
         $this->bookReservationService->checkBookOut($request->bookId);
 //        session()->put('success','Book reserved!');
 
-
-        return redirect('/books')->with('success', 'Book reserved!');
+        return back()->with('success', 'Book reserved!');
     }
 
     /**
@@ -91,12 +90,14 @@ class BooksReservationController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Reservation  $reservation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Reservation $reservation)
+    public function update(Request $request)
     {
-        //
+        $this->bookReservationService->checkBookIn($request->bookId);
+//        session()->put('success','Book checked in!');
+
+        return back()->with('success', 'Book checked in!');
     }
 
     /**
@@ -109,6 +110,6 @@ class BooksReservationController extends Controller
     {
         $this->bookReservationService->deleteReservation($id);
 
-        return redirect('/reservations')->with('success', 'Book deleted!');
+        return back()->with('success', 'Book deleted!');
     }
 }

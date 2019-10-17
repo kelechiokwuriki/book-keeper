@@ -38,20 +38,19 @@ class BookReservationService
     public function checkBookIn($bookId)
     {
         try{
-            $bookReservation = $this->bookModel->reservations()->where('user_id', auth()->id())
-                ->whereNotNull('checked_out_at')
-                ->whereNull('checked_in_at')
-                ->first();
+            $book = $this->bookService->getBookById($bookId);
 
-            if($bookReservation){
+            $bookReservation = $book->reservations()->where('book_id', $bookId)->first();
+            if(isset($bookReservation)) {
                 $bookReservation->update([
                     'checked_in_at' => now()
                 ]);
 
                 $this->updateBookAvailability($bookId, true);
-
                 return $bookReservation;
             }
+            return false;
+
         } catch (\Exception $exception){
             echo $exception->getMessage(); Log::error($exception->getMessage());
             return false;
@@ -63,18 +62,22 @@ class BookReservationService
         try{
             $book = $this->bookService->getBookById($bookId);
 
-            $bookReservation = $book->reservations()->create([
-                'user_id' => Auth::id(),
-                'book_id' => $book->id,
-                'checked_out_at' => now(),
-                'checked_in_at' => null
-            ]);
+            if(isset($book)) {
+                $bookReservation = $book->reservations()->create([
+                    'user_id' => Auth::id(),
+                    'book_id' => $book->id,
+                    'checked_out_at' => now(),
+                    'checked_in_at' => null
+                ]);
 
-            $this->updateBookAvailability($bookId, false);
-            return $bookReservation;
+                $this->updateBookAvailability($bookId, false);
+                return $bookReservation;
+            }
+            return false;
 
         } catch (\Exception $exception){
-            echo $exception->getMessage(); Log::error($exception->getMessage());
+            echo $exception->getMessage();
+            Log::error($exception->getMessage());
             return false;
         }
     }
@@ -85,7 +88,8 @@ class BookReservationService
             $result = $this->reservationRepository->getById($id);
             return $this->isValid($result);
         } catch (\Exception $exception){
-            echo $exception->getMessage(); Log::error($exception->getMessage());
+            echo $exception->getMessage();
+            Log::error($exception->getMessage());
             return false;
         }
     }

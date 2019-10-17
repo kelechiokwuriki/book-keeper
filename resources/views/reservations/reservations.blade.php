@@ -34,8 +34,7 @@
                                     <th>Book</th>
                                     <th>Checked out date</th>
                                     <th>Checked in date</th>
-                                    <th>Check In</th>
-                                    <th>Delete</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -51,27 +50,29 @@
                                         @else
                                             <td>{{$reservation->checked_in_at}}</td>
                                         @endif
-                                        <td>
-
                                             <!--TODO update the reservation table with a checked in data
                                             if user has checked book in, show delete reservation
                                             else show check book in
                                             -->
-                                            <form method="POST" action="/reservations/{{$reservation->id}}">
-                                                {{csrf_field()}}
-                                                {{ method_field('PATCH') }}
-                                                <input type="hidden" name="reservationId" value="{{$reservation->id}}">
-                                                <button type="submit" class="btn btn-warning" role="button">Check book in</button>
-                                            </form>
-                                        </td>
-                                        <td>
-                                            <form method="POST" action="/reservations/{{$reservation->id}}">
-                                                {{csrf_field()}}
-                                                {{ method_field('DELETE') }}
-                                                <input type="hidden" name="reservationId" value="{{$reservation->id}}">
-                                                <button type="submit" class="btn btn-warning" role="button">Delete reservation</button>
-                                            </form>
-                                        </td>
+                                            @if($reservation->checked_in_at === null)
+                                            <td>
+                                                <form method="POST" action="/reservations/{{$reservation->id}}">
+                                                    {{csrf_field()}}
+                                                    {{ method_field('PATCH') }}
+                                                    <input type="hidden" name="bookId" value="{{$reservation->book_id}}">
+                                                    <button type="submit" class="btn btn-success" role="button">Check book in</button>
+                                                </form>
+                                            </td>
+                                        @else
+                                            <td>
+                                                <form method="POST" action="/reservations/{{$reservation->id}}">
+                                                    {{csrf_field()}}
+                                                    {{ method_field('DELETE') }}
+                                                    <input type="hidden" name="reservationId" value="{{$reservation->id}}">
+                                                    <button type="submit" class="btn btn-warning" role="button">Delete reservation</button>
+                                                </form>
+                                            </td>
+                                        @endif
                                     </tr>
                             @endforeach
                             </tbody>
