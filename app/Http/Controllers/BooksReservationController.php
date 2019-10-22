@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\BookCheckedInNotification;
 use App\Notifications\BookReservedNotification;
 use App\Reservation;
 use App\Services\Book\BookService;
@@ -103,7 +104,9 @@ class BooksReservationController extends Controller
     public function update(Request $request)
     {
         $this->bookReservationService->checkBookIn($request->bookId);
-//        session()->put('success','Book checked in!');
+
+        //send a book checked in notification to logged in user
+        Notification::send(auth()->user(), new BookCheckedInNotification());
 
         return back()->with('success', 'Book checked in!');
     }

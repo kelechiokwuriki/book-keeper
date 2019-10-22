@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class BookReservedNotification extends Notification
+class BookCheckedInNotification extends Notification
 {
     use Queueable;
 
@@ -41,8 +41,8 @@ class BookReservedNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('You reserved a book')
-                    ->action('View reservations', url('/reservations'))
+                    ->line('You checked in a book')
+                    ->action('View your reservations', url('/reservations'))
                     ->line('Thank you for using our application!');
     }
 
