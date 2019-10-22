@@ -2,22 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\BookReservedNotification;
 use App\Reservation;
 use App\Services\Book\BookService;
-use App\Services\Reservation\BookReservationService;
-use App\Services\Reservation\ReservationCrud;
+use App\Services\Reservation\ReservationService;
+use App\Services\User\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Notifications\Notifiable;
 
 class BooksReservationController extends Controller
 {
     protected $bookReservationService;
     protected $bookService;
+    protected $userService;
 
-    public function __construct(BookReservationService $bookReservationService,
-                                BookService $bookService)
+    public function __construct(ReservationService $bookReservationService,
+                                BookService $bookService,
+                                UserService $userService)
     {
         $this->bookReservationService = $bookReservationService;
         $this->bookService = $bookService;
+        $this->userService = $userService;
     }
 
     /**
@@ -54,7 +60,9 @@ class BooksReservationController extends Controller
     public function store(Request $request)
     {
         $this->bookReservationService->checkBookOut($request->bookId);
-//        session()->put('success','Book reserved!');
+
+        //send a book reserved notification to logged in user
+        Notification::send(auth()->user(), new BookReservedNotification);
 
         return back()->with('success', 'Book reserved!');
     }

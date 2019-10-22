@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Services\Book\BookService;
+use App\Services\Reservation\ReservationService;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
 
     protected $bookService;
+    protected $reservationService;
 
-    public function __construct(BookService $bookService)
+    public function __construct(BookService $bookService, ReservationService $reservationService)
     {
         $this->bookService = $bookService;
+        $this->reservationService = $reservationService;
     }
 
     /**
@@ -23,8 +26,9 @@ class DashboardController extends Controller
     public function index()
     {
         $booksCount = $this->bookService->getNumberOfbooksAvailable();
+        $userReservationCount = $this->reservationService->getNumberOfUserRegisterationInfo();
 
-        return view('dashboard.dashboard', compact(['booksCount']));
+        return view('dashboard.dashboard', compact(['booksCount', 'userReservationCount']));
     }
 
     /**

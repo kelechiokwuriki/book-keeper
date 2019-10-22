@@ -6,7 +6,7 @@ namespace App\Services\Reservation;
 
 use App\Book;
 use App\Repositories\Book\BookRepository;
-use App\Repositories\BookReservation\BookReservationRepository;
+use App\Repositories\Reservation\ReservationRepository;
 use App\Reservation;
 use App\Services\Book\BookService;
 use App\Services\User\UserService;
@@ -14,7 +14,7 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
-class BookReservationService
+class ReservationService
 {
     protected $reservationRepository;
     protected $bookService;
@@ -23,7 +23,7 @@ class BookReservationService
 
     protected $bookModel;
 
-    public function __construct(BookReservationRepository $reservationRepository,
+    public function __construct(ReservationRepository $reservationRepository,
                                 BookRepository $bookRepository,
                                 BookService $bookService,
                                 UserService $userService,
@@ -35,6 +35,10 @@ class BookReservationService
         $this->bookModel = $bookModel;
     }
 
+    /**
+     * @param $bookId id of intended book to be checked in
+     * @return bool or reservation
+     */
     public function checkBookIn($bookId)
     {
         try{
@@ -57,6 +61,10 @@ class BookReservationService
         }
     }
 
+    /**
+     * @param $bookId id of intended book to be checked out
+     * @return bool or reseravation
+     */
     public function checkBookOut($bookId)
     {
         try{
@@ -82,18 +90,29 @@ class BookReservationService
         }
     }
 
+    /**
+     * @param $id of intended registeration to retrieve
+     * @return bool or result
+     */
     public function getReservationById($id)
     {
         try{
             $result = $this->reservationRepository->getById($id);
+
             return $this->isValid($result);
+
         } catch (\Exception $exception){
             echo $exception->getMessage();
             Log::error($exception->getMessage());
+
             return false;
         }
     }
 
+    /**
+     * @param $id id of intended book to delete
+     * @return bool
+     */
     public function deleteReservation($id)
     {
         try{
@@ -104,6 +123,9 @@ class BookReservationService
         }
     }
 
+    /**
+     * @return bool get all registerations
+     */
     public function getAllReservations()
     {
         try{
@@ -115,6 +137,11 @@ class BookReservationService
         }
     }
 
+    /**
+     * @param $reservations $reservations model
+     * @return bool or reservation object
+     * This method returns the reservation model with added properties
+     */
     public function returnReservObjWithMoreInfo($reservations) {
         foreach($reservations as $reservation)
         {
@@ -125,6 +152,10 @@ class BookReservationService
         return $reservations ?? false;
     }
 
+    /**
+     * @param $id id of reservatation to find
+     * @return bool or reservation model
+     */
     public function getReservationWhereFieldMatches($id)
     {
         try{
@@ -136,7 +167,19 @@ class BookReservationService
         }
     }
 
+    /**
+     * @return mixed returns the total numnber of registerations
+     */
+    public function getNumberOfUserRegisterationInfo() {
+        return $this->reservationRepository->getCount();
+    }
+
     //validate result data
+
+    /**
+     * @param $result book result from eloquent find
+     * @return bool or result if validated (empty)
+     */
     private function isValid($result)
     {
         if(isset($result) && $result !== null)
@@ -146,6 +189,11 @@ class BookReservationService
         return false;
     }
 
+    /**
+     * @param $bookId id of intented book to update
+     * @param $value intended value
+     * @return mixed bool or book data
+     */
     private function updateBookAvailability($bookId, $value)
     {
         return $this->bookService->updateBookWhere($bookId, $value);

@@ -1,13 +1,13 @@
 <?php
 
 
-namespace App\Repositories\BookReservation;
+namespace App\Repositories\Reservation;
 
 
 use App\Repositories\EloquentRepository;
 use App\Reservation;
 
-class BookReservationRepository extends EloquentRepository
+class ReservationRepository extends EloquentRepository
 {
     public function __construct(Reservation $reservationModel)
     {

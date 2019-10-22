@@ -29,7 +29,6 @@ class BookService
     public function updateBookWhere($id, $data)
     {
         return $this->bookRepository->updateBookWhere($id, $data);
-//        return Book::where('id', $id)->update(['available' => $data]);
     }
 
     public function deleteBook($id)
