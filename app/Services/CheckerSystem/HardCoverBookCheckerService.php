@@ -15,20 +15,18 @@ use Illuminate\Support\Facades\Log;
 class HardCoverBookCheckerService implements BookCheckSystemInterface
 {
     protected $bookRepository;
-    protected $bookService;
 
-    public function __construct(BookRepository $bookRepository, BookService $bookService)
+    public function __construct(BookRepository $bookRepository)
     {
         $this->bookRepository = $bookRepository;
-        $this->bookService = $bookService;
     }
 
-    public function checkBookIn(Book $book)
+    public function checkBookIn($bookId)
     {
         try{
-            $getBook = $this->bookRepository->getById($book->id);
+            $getBook = $this->bookRepository->getById($bookId);
 
-            $bookReservation = $getBook->reservations()->where('book_id', $getBook->id)->first();
+            $bookReservation = $getBook->reservations()->where('book_id', $bookId)->first();
 
             if(isset($bookReservation)) {
                 $bookReservation->update([
@@ -36,36 +34,36 @@ class HardCoverBookCheckerService implements BookCheckSystemInterface
                 ]);
 
                 //change book availability to true
-                $this->updateBookAvailability($book->id, true);
+                $this->updateBookAvailability($bookId, true);
                 return $bookReservation;
             }
 
         } catch (\Exception $exception){
-            Log::error('Unable to check book in ' . 'Excep: ' . $exception->getMessage() . 'Book with ID: ' . $book->id);
+            Log::error('Unable to check book in ' . 'Excep: ' . $exception->getMessage() . 'Book with ID: ' . $bookId);
             return false;
         }
     }
 
-    public function checkBookOut(Book $book)
+    public function checkBookOut($bookId)
     {
         try{
-            $getBook = $this->bookRepository->getById($book->id);
+            $getBook = $this->bookRepository->getById($bookId);
 
             if(isset($getBook)) {
                 $bookReservation = $getBook->reservations()->create([
                     'user_id' => Auth::id(),
-                    'book_id' => $book->id,
+                    'book_id' => $bookId,
                     'checked_out_at' => now(),
                     'checked_in_at' => null
                 ]);
 
                 //change book availability to false
-                $this->updateBookAvailability($book->id, false);
+                $this->updateBookAvailability($bookId, false);
                 return $bookReservation;
             }
 
         } catch (\Exception $exception) {
-            Log::error('Unable to check book out ' . 'Excep: ' . $exception->getMessage() . 'Book with ID: ' . $book->id);
+            Log::error('Unable to check book out ' . 'Excep: ' . $exception->getMessage() . 'Book with ID: ' . $bookId);
             return false;
         }
     }

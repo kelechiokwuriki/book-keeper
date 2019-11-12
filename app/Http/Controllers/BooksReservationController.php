@@ -1,30 +1,44 @@
-<?php
+<?php /** @noinspection PhpUndefinedFieldInspection */
 
 namespace App\Http\Controllers;
 
 use App\Notifications\BookCheckedInNotification;
 use App\Notifications\BookReservedNotification;
+use App\Repositories\Book\BookRepository;
 use App\Reservation;
 use App\Services\Book\BookService;
+use App\Services\CheckerSystem\BookCheckerService;
+use App\Services\CheckerSystem\HardCoverBookCheckerService;
+use App\Services\FormatterService;
+use App\Services\Reservation\ReservationFormatter;
 use App\Services\Reservation\ReservationService;
 use App\Services\User\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
-use Illuminate\Notifications\Notifiable;
 
 class BooksReservationController extends Controller
 {
     protected $bookReservationService;
     protected $bookService;
     protected $userService;
+    protected $bookCheckerService;
+    protected $bookRepository;
+    protected $formatterService;
 
     public function __construct(ReservationService $bookReservationService,
+                                FormatterService $formatterService,
+                                BookCheckerService $bookCheckerService,
+                                BookRepository $bookRepository,
                                 BookService $bookService,
                                 UserService $userService)
     {
         $this->bookReservationService = $bookReservationService;
         $this->bookService = $bookService;
         $this->userService = $userService;
+        $this->bookRepository = $bookRepository;
+        $this->formatterService = $formatterService;
+
+        $this->bookCheckerService = $bookCheckerService;
     }
 
     /**
@@ -36,7 +50,8 @@ class BooksReservationController extends Controller
     {
         $reservations = auth()->user()->reservations()->get();
 
-        $newReservationObject = $this->bookReservationService->returnReservObjWithMoreInfo($reservations);
+        $newReservationObject = $this->formatterService->format($reservations,
+            new ReservationFormatter($this->bookService, $this->userService));
 
         return view('reservations.reservations', compact('newReservationObject'));
     }
@@ -48,8 +63,7 @@ class BooksReservationController extends Controller
      */
     public function create()
     {
-//        $reservations = $this->reservationService->getAllReservations();
-//        return view('reservations.create', compact('reservations'));
+
     }
 
     /**
@@ -60,11 +74,9 @@ class BooksReservationController extends Controller
      */
     public function store(Request $request)
     {
-        $this->bookReservationService->checkBookOut($request->bookId);
+        $this->bookCheckerService->checkBookOut($request->bookId, new HardCoverBookCheckerService($this->bookRepository));
 
-        //send a book reserved notification to logged in user
         Notification::send(auth()->user(), new BookReservedNotification);
-
         return back()->with('success', 'Book reserved!');
     }
 
@@ -76,12 +88,10 @@ class BooksReservationController extends Controller
      */
     public function show($id)
     {
-        //get reservation by book id
         $reservation = $this->bookReservationService->getReservationWhereFieldMatches($id);
         $reservationObj = $this->bookReservationService->returnReservObjWithMoreInfo($reservation);
 
         return $reservationObj;
-
     }
 
     /**
@@ -92,7 +102,7 @@ class BooksReservationController extends Controller
      */
     public function edit(Reservation $reservation)
     {
-        //
+
     }
 
     /**
@@ -105,9 +115,7 @@ class BooksReservationController extends Controller
     {
         $this->bookReservationService->checkBookIn($request->bookId);
 
-        //send a book checked in notification to logged in user
         Notification::send(auth()->user(), new BookCheckedInNotification());
-
         return back()->with('success', 'Book checked in!');
     }
 
@@ -120,7 +128,6 @@ class BooksReservationController extends Controller
     public function destroy($id)
     {
         $this->bookReservationService->deleteReservation($id);
-
         return back()->with('success', 'Book deleted!');
     }
 }

@@ -8,7 +8,7 @@ use App\Book;
 
 interface BookCheckSystemInterface
 {
-    public function checkBookIn(Book $book);
-    public function checkBookOut(Book $book);
+    public function checkBookIn($book);
+    public function checkBookOut($book);
 
 }
