@@ -37,6 +37,7 @@
                                 <th>Available</th>
                                 <th>View</th>
                                 <th>Reservation</th>
+                                <th>Recommend</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -57,9 +58,17 @@
                                                 <input type="hidden" name="bookId" value="{{$book->id}}">
                                                 <button type="submit" class="btn btn-success" role="button">Reserve book</button>
                                             </form></td>
+                                        <td>
+                                            <form method="POST" action="/recommend">
+                                                {{csrf_field()}}
+                                                <input type="hidden" name="bookId" value="{{$book->id}}">
+                                                <button type="submit" class="btn btn-primary" role="button">Recommend book</button>
+                                            </form>
+                                        </td>
                                     @else
                                         <td><button id="{{$book->id}}" data-target="#viewReservationModal" data-toggle="modal"
                                                     class="btn btn-warning viewReservation" role="button">View reservation</button></td>
+                                        <td><button id="" class="btn btn-block btn-default disabled">n/a</button></td>
                                     @endif
                                 </tr>
                             @endforeach

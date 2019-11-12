@@ -24,7 +24,6 @@ class ReservationService
     protected $bookModel;
 
     public function __construct(ReservationRepository $reservationRepository,
-                                BookRepository $bookRepository,
                                 BookService $bookService,
                                 UserService $userService,
                                 Book $bookModel)
@@ -45,6 +44,7 @@ class ReservationService
             $book = $this->bookService->getBookById($bookId);
 
             $bookReservation = $book->reservations()->where('book_id', $bookId)->first();
+
             if(isset($bookReservation)) {
                 $bookReservation->update([
                     'checked_in_at' => now()
@@ -56,7 +56,7 @@ class ReservationService
             return false;
 
         } catch (\Exception $exception){
-            echo $exception->getMessage(); Log::error($exception->getMessage());
+            Log::error('Unable to check book in ' . 'Excep: ' . $exception->getMessage() . 'Book with ID: ' . $bookId);
             return false;
         }
     }
@@ -178,20 +178,16 @@ class ReservationService
 
     /**
      * @param $result book result from eloquent find
-     * @return bool or result if validated (empty)
+     * @return mixed
      */
     private function isValid($result)
     {
-        if(isset($result) && $result !== null)
-        {
-            return $result;
-        }
-        return false;
+        return isset($result) && $result !== null ? $result : false;
     }
 
     /**
      * @param $bookId id of intented book to update
-     * @param $value intended value
+     * @param $value - intended value
      * @return mixed bool or book data
      */
     private function updateBookAvailability($bookId, $value)

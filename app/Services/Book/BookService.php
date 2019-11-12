@@ -18,12 +18,20 @@ class BookService
 
     public function createBook($book)
     {
-        return $this->bookRepository->create($book);
+        try{
+            return $this->bookRepository->create($book);
+        } catch (\Exception $exception) {
+            Log::error('Error creating book record' . 'Excep: ' . $exception->getMessage() . ' Data: ' . json_encode($book));
+        }
     }
 
     public function updateBook($id, $book)
     {
-        return $this->bookRepository->update($id, $book);
+        try{
+            return $this->bookRepository->update($id, $book);
+        } catch (\Exception $exception) {
+            Log::error('Error updating book record' . 'Excep: ' . $exception->getMessage() . ' Data: ' . json_encode($book));
+        }
     }
 
     public function updateBookWhere($id, $data)
