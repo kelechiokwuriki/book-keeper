@@ -14,6 +14,7 @@ use App\Services\Reservation\ReservationFormatter;
 use App\Services\Reservation\ReservationService;
 use App\Services\User\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Notification;
 
 class BooksReservationController extends Controller
@@ -23,10 +24,10 @@ class BooksReservationController extends Controller
     protected $userService;
     protected $bookCheckerService;
     protected $bookRepository;
-    protected $formatterService;
+
+    use FormatterService;
 
     public function __construct(ReservationService $bookReservationService,
-                                FormatterService $formatterService,
                                 BookCheckerService $bookCheckerService,
                                 BookRepository $bookRepository,
                                 BookService $bookService,
@@ -36,21 +37,19 @@ class BooksReservationController extends Controller
         $this->bookService = $bookService;
         $this->userService = $userService;
         $this->bookRepository = $bookRepository;
-        $this->formatterService = $formatterService;
-
         $this->bookCheckerService = $bookCheckerService;
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
         $reservations = auth()->user()->reservations()->get();
 
-        $newReservationObject = $this->formatterService->format($reservations,
+        $newReservationObject = $this->format($reservations,
             new ReservationFormatter($this->bookService, $this->userService));
 
         return view('reservations.reservations', compact('newReservationObject'));
@@ -59,7 +58,7 @@ class BooksReservationController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -69,36 +68,35 @@ class BooksReservationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(Request $request)
     {
-        $this->bookCheckerService->checkBookOut($request->bookId, new HardCoverBookCheckerService($this->bookRepository));
+        $this->bookCheckerService->checkBookOut($request->bookId, new HardCoverBookCheckerService($this->bookService));
 
-        Notification::send(auth()->user(), new BookReservedNotification);
+//        Notification::send(auth()->user(), new BookReservedNotification);
         return back()->with('success', 'Book reserved!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param Reservation $reservation
+     * @param $id
      * @return bool
      */
-    public function show($id)
+    public function show($id): bool
     {
         $reservation = $this->bookReservationService->getReservationWhereFieldMatches($id);
-        $reservationObj = $this->bookReservationService->returnReservObjWithMoreInfo($reservation);
 
-        return $reservationObj;
+        return $this->format($reservation, new ReservationFormatter($this->bookService, $this->userService));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Reservation  $reservation
-     * @return \Illuminate\Http\Response
+     * @param Reservation $reservation
+     * @return void
      */
     public function edit(Reservation $reservation)
     {
@@ -108,12 +106,12 @@ class BooksReservationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function update(Request $request)
     {
-        $this->bookReservationService->checkBookIn($request->bookId);
+        $this->bookCheckerService->checkBookIn($request->bookId, new HardCoverBookCheckerService($this->bookService));
 
         Notification::send(auth()->user(), new BookCheckedInNotification());
         return back()->with('success', 'Book checked in!');
@@ -122,10 +120,10 @@ class BooksReservationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Reservation  $reservation
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return Response
      */
-    public function destroy($id)
+    public function destroy($id): Response
     {
         $this->bookReservationService->deleteReservation($id);
         return back()->with('success', 'Book deleted!');

@@ -7,6 +7,7 @@ namespace App\Services\Reservation;
 use App\Interfaces\Formatter;
 use App\Services\Book\BookService;
 use App\Services\User\UserService;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 
 class ReservationFormatter implements Formatter
@@ -28,6 +29,7 @@ class ReservationFormatter implements Formatter
      */
     public function format($reservations)
     {
+
         try{
             foreach ($reservations as $reservation) {
                 $reservation->bookTitle = $this->bookService->getBookById($reservation->book_id)->title;

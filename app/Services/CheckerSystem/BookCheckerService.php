@@ -12,4 +12,8 @@ class BookCheckerService
         return $bookCheckSystem->checkBookOut($book);
     }
 
+    public function checkBookIn($book, BookCheckSystemInterface $bookCheckSystem) {
+        return $bookCheckSystem->checkBookIn($book);
+    }
+
 }

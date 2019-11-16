@@ -6,7 +6,7 @@ namespace App\Services;
 
 use App\Interfaces\Formatter;
 
-class FormatterService
+trait FormatterService
 {
     public function format($data, Formatter $formatter) {
         return $formatter->format($data);

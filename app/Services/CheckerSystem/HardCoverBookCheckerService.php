@@ -15,16 +15,17 @@ use Illuminate\Support\Facades\Log;
 class HardCoverBookCheckerService implements BookCheckSystemInterface
 {
     protected $bookRepository;
+    protected $bookService;
 
-    public function __construct(BookRepository $bookRepository)
+    public function __construct(BookService $bookService)
     {
-        $this->bookRepository = $bookRepository;
+        $this->bookService = $bookService;
     }
 
     public function checkBookIn($bookId)
     {
         try{
-            $getBook = $this->bookRepository->getById($bookId);
+            $getBook = $this->bookService->getBookById($bookId);
 
             $bookReservation = $getBook->reservations()->where('book_id', $bookId)->first();
 
@@ -47,7 +48,7 @@ class HardCoverBookCheckerService implements BookCheckSystemInterface
     public function checkBookOut($bookId)
     {
         try{
-            $getBook = $this->bookRepository->getById($bookId);
+            $getBook = $this->bookService->getBookById($bookId);
 
             if(isset($getBook)) {
                 $bookReservation = $getBook->reservations()->create([
@@ -75,6 +76,6 @@ class HardCoverBookCheckerService implements BookCheckSystemInterface
      */
     private function updateBookAvailability($bookId, $value)
     {
-        return $this->bookRepository->updateBookWhere($bookId, $value);
+        return $this->bookService->updateBookWhere($bookId, $value);
     }
 }

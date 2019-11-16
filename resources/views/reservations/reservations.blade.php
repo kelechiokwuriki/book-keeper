@@ -21,7 +21,7 @@
                     <div class="box-body">
                         @if (session('success'))
                             <div class="alert alert-success alert-dismissible" role="alert">
-{{--                                {{ session('success') }}--}}
+                                {{ session('success') }}
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -43,7 +43,7 @@
                                     <?php $tableNoCounter++?>
                                     <tr>
                                         <td>{{$tableNoCounter}}</td>
-                                        <td>{{$reservation->bookTitleNew}}</td>
+                                        <td>{{$reservation->bookTitle}}</td>
                                         <td>{{$reservation->checked_out_at}}</td>
                                         @if($reservation->checked_in_at === null)
                                             <td><small>Awaiting</small></td>
