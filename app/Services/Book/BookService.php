@@ -16,32 +16,15 @@ class BookService
         $this->bookRepository = $bookRepository;
     }
 
-    public function createBook($book)
-    {
-        try{
-            return $this->bookRepository->create($book);
-        } catch (\Exception $exception) {
-            Log::error('Error creating book record' . 'Excep: ' . $exception->getMessage() . ' Data: ' . json_encode($book));
-        }
-    }
-
-    public function updateBook($id, $book)
-    {
-        try{
-            return $this->bookRepository->update($id, $book);
-        } catch (\Exception $exception) {
-            Log::error('Error updating book record' . 'Excep: ' . $exception->getMessage() . ' Data: ' . json_encode($book));
-        }
-    }
-
     public function updateBookWhere($id, $data)
     {
-        return $this->bookRepository->updateBookWhere($id, $data);
-    }
-
-    public function deleteBook($id)
-    {
-        $this->bookRepository->delete($id);
+        try{
+            return $this->bookRepository->updateBookWhere($id, $data);
+        } catch (\Exception $e){
+            Log::error('Unable to update book with ID: '. json_encode($id) . 'Data: ' . json_encode($data)
+            . 'Exception: ' . json_encode($e->getMessage()));
+            return false;
+        }
     }
 
     public function getNumberOfbooksAvailable()
@@ -51,20 +34,15 @@ class BookService
 
     public function getAllBooks(){
         try{
-            $result = $this->bookRepository->all();
-            if(isset($result) && $result !== null)
-            {
-                return $result;
-            }
-            return false;
-
+            return $this->bookRepository->all();
         }  catch (\Exception $exception){
+            Log::error('Error fetching all books');
             echo $exception->getMessage(); Log::error($exception->getMessage());
             return false;
         }
     }
 
     public function getBookById($id){
-        return $this->bookRepository->getById($id);
+        return $this->bookRepository->findById($id);
     }
 }

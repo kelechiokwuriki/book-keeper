@@ -97,7 +97,7 @@ class ReservationService
     public function getReservationById($id)
     {
         try{
-            $result = $this->reservationRepository->getById($id);
+            $result = $this->reservationRepository->findById($id);
 
             return $this->isValid($result);
 

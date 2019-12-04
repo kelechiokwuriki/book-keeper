@@ -17,6 +17,6 @@ class UserService
 
     public function getUserById($id)
     {
-        return $this->userRepository->getById($id);
+        return $this->userRepository->findById($id);
     }
 }

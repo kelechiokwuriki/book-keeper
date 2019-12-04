@@ -1,4 +1,4 @@
-<?php /** @noinspection PhpUndefinedFieldInspection */
+<?php
 
 namespace App\Http\Controllers;
 
