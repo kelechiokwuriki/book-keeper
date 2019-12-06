@@ -59,7 +59,7 @@
                                                 <form method="POST" action="/reservations/{{$reservation->id}}">
                                                     {{csrf_field()}}
                                                     {{ method_field('PATCH') }}
-                                                    <input type="hidden" name="bookId" value="{{$reservation->book_id}}">
+                                                    <input type="hidden" name="reservationId" value="{{$reservation->id}}">
                                                     <button type="submit" class="btn btn-success" role="button">Check book in</button>
                                                 </form>
                                             </td>

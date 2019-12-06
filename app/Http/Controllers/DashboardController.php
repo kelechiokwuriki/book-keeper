@@ -25,7 +25,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $booksCount = $this->bookService->getNumberOfbooksAvailable();
+        $booksCount = $this->bookService->numberOfBooksAvailable();
         $userReservationCount = $this->reservationService->getNumberOfUserRegisterationInfo();
 
         return view('dashboard.dashboard', compact(['booksCount', 'userReservationCount']));

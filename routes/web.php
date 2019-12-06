@@ -25,7 +25,7 @@ Auth::routes();
 Route::resource('books', 'BooksController')->middleware('auth');
 
 //reservations
-Route::resource('reservations', 'BooksReservationController')->middleware('auth');
+Route::resource('reservations', 'ReservationsController')->middleware('auth');
 
 //dashboard
 Route::resource('dashboard', 'DashboardController')->middleware('auth');

@@ -16,10 +16,10 @@ class BookService
         $this->bookRepository = $bookRepository;
     }
 
-    public function updateBookWhere($id, $data)
+    public function updateBook($id, $data)
     {
         try{
-            return $this->bookRepository->updateBookWhere($id, $data);
+            return $this->bookRepository->update($id, $data);
         } catch (\Exception $e){
             Log::error('Unable to update book with ID: '. json_encode($id) . 'Data: ' . json_encode($data)
             . 'Exception: ' . json_encode($e->getMessage()));
@@ -27,7 +27,7 @@ class BookService
         }
     }
 
-    public function getNumberOfbooksAvailable()
+    public function numberOfBooksAvailable()
     {
         return $this->bookRepository->getCount();
     }

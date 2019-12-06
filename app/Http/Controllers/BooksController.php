@@ -35,7 +35,7 @@ class BooksController extends Controller
             }
         }
 
-        return view('books.home', compact('books'));
+        return view('books.books', compact('books'));
     }
 
     /**
